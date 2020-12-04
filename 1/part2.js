@@ -1,15 +1,5 @@
-const fs = require('fs')
-
-let data;
-
-try {
-  data = fs.readFileSync('./input.txt', 'utf8');
-} catch (err) {
-  console.error(err);
-}
-
-data = data.split('\n');
-data.pop();
+const { getData } = require('../shared/getData');
+const data = getData('./input.txt');
 
 for (const line of data) {
   const current = parseInt(line);
