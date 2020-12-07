@@ -15,4 +15,23 @@ const getData = (filename) => {
   return data;
 };
 
+const convertToGroups = (data) => {
+  const groupedData = [];
+  let currDataIndex = 0;
+
+  // I'm sure this could be better, but I'm moving on
+  for (const datum of data) {
+    if (!datum) {
+      currDataIndex++;
+      continue;
+    }
+    if (!groupedData[currDataIndex]) {
+      groupedData[currDataIndex] = [];
+    }
+    groupedData[currDataIndex].push(datum);
+  }
+  return groupedData;
+}
+
 exports.getData = getData;
+exports.convertToGroups = convertToGroups;

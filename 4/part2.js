@@ -1,20 +1,5 @@
-const { getData } = require('../shared/getData');
-const data = getData('./input.txt');
-
-const passportData = [];
-let currDataIndex = 0;
-
-// I'm sure this could be better, but I'm moving on
-for (const datum of data) {
-  if (!datum) {
-    currDataIndex++;
-    continue;
-  }
-  if (!passportData[currDataIndex]) {
-    passportData[currDataIndex] = [];
-  }
-  passportData[currDataIndex].push(datum);
-}
+const { getData, convertToGroups } = require('../shared/getData');
+const data = convertToGroups(getData('./input.txt'));
 
 const getValue = (key, passport) => {
   const regex = new RegExp(`${key}:([^\\s]+)`);
@@ -89,7 +74,7 @@ const checks = [
 ];
 
 let validCount = 0;
-for (const datum of passportData) {
+for (const datum of data) {
   const passport = datum.join(' ');
   let isValid = true;
   for (const check of checks) {
