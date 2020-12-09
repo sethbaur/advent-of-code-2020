@@ -1,20 +1,20 @@
 const { getData } = require('../shared/getData');
 const data = getData('./input.txt');
 
-const instRegex = /^([\w]{3}) ([+|-])(\d+)$/;
+const instRegex = /^([\w]{3}) ([+|-]\d+)$/;
 
 const executeInstruction = (line, startPointer, startAcc) => {
   let pointer = startPointer;
   let acc = startAcc;
-  const [, inst, sign, increment] = line.match(instRegex);
+  const [, inst, increment] = line.match(instRegex);
   const number = parseInt(increment);
   switch (inst) {
     case 'acc':
-      acc += sign === '+' ? number : -1 * number;
+      acc += number;
       pointer++;
       break;
     case 'jmp':
-      pointer += sign === '+' ? number : -1 * number;
+      pointer += number;
       break;
     default:
       pointer++;

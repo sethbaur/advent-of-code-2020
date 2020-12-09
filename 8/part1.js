@@ -5,20 +5,20 @@ let pointer = 0;
 let acc = 0;
 const executedLines = [];
 
-const instRegex = /^([\w]{3}) ([+|-])(\d+)$/;
+const instRegex = /^([\w]{3}) ([+|-]\d+)$/;
 
 while (!executedLines.includes(pointer)) {
   const line = data[pointer];
   executedLines.push(pointer);
-  const [, inst, sign, increment] = line.match(instRegex);
+  const [, inst, increment] = line.match(instRegex);
   const number = parseInt(increment);
   switch (inst) {
     case 'acc':
-      acc += sign === '+' ? number : -1 * number;
+      acc += number;
       pointer++;
       break;
     case 'jmp':
-      pointer += sign === '+' ? number : -1 * number;
+      pointer += number;
       break;
     default:
       pointer++;
